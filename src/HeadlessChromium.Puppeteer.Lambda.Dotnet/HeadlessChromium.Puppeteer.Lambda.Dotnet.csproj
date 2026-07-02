@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>HeadlessChromium.Puppeteer.Dotnet.OS.Fork</PackageId>
     <Company>Litmus</Company>
     <PackageLicenseUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
     <Copyright>2022 Litmus</Copyright>
@@ -9,7 +10,7 @@
     <RepositoryUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</RepositoryUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version Condition="'$(VersionSuffix)' != ''">1.1.0.$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' != ''">1.1.1.$(VersionSuffix)</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -21,10 +22,6 @@
 
   <ItemGroup>
     <Content Include="..\..\chrome-aws-lambda\package\bin\chromium.br">
-      <Pack>true</Pack>
-      <PackageCopyToOutput>true</PackageCopyToOutput>
-    </Content>
-    <Content Include="..\..\chrome-aws-lambda\package\bin\al2.tar.br">
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>

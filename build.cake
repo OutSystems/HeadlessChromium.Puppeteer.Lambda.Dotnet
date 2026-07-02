@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using ICSharpCode.SharpZipLib.GZip;
 
 var configuration = Argument("configuration", "Release");
-var version = AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Version : "0-dev";
+var version = Argument("version", AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Version : "0-os-dev");
 var releaseBinPath = "./src/HeadlessChromium.Puppeteer.Lambda.Dotnet/bin/Release/netcoreapp2.1";
 var artifactsDirectory = "./artifacts";
 

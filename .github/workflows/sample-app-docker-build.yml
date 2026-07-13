@@ -20,7 +20,10 @@ jobs:
           cake-version: 1.3.0
       - name: Build and package lambda
         working-directory: ./sample/SampleLambda-dotnet${{ matrix.version }}
-        run: dotnet lambda package SampleLambda --profile default --region us-west-1
+        env:
+          AWS_ACCESS_KEY_ID: dummy-access-key-id
+          AWS_SECRET_ACCESS_KEY: dummy-secret-access-key
+        run: dotnet lambda package SampleLambda --region us-west-1
       - name: Run docker
         run: docker run --detach -p 9000:8080 samplelambda-dotnet${{ matrix.version }}:latest
       - name: Test function

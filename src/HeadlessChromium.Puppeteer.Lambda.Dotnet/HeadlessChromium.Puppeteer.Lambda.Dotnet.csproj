@@ -3,11 +3,13 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>HeadlessChromium.Puppeteer.Dotnet.OS.Fork</PackageId>
-    <Company>Litmus</Company>
-    <PackageLicenseUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
-    <Copyright>2022 Litmus</Copyright>
-    <PackageProjectUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</RepositoryUrl>
+    <Company>OutSystems</Company>
+    <Authors>RD Vanguard</Authors>
+    <Description>OutSystems-maintained fork of HeadlessChromium.Puppeteer.Lambda.Dotnet (originally by Litmus): https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</Description>
+    <PackageLicenseUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>2022 Litmus, 2026 OutSystems</Copyright>
+    <PackageProjectUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet</RepositoryUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Version Condition="'$(VersionSuffix)' != ''">1.1.1.$(VersionSuffix)</Version>

@@ -2,8 +2,6 @@ version: 2
 updates:
 - package-ecosystem: nuget
   directories:
-    - "/sample/SampleLambda-dotnet6"
-    - "/sample/SampleLambda-dotnet7"
     - "/sample/SampleLambda-dotnet8"
   schedule:
     interval: daily

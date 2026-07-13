@@ -3,8 +3,8 @@ FROM public.ecr.aws/lambda/dotnet:10
 # Set the image's internal work directory
 WORKDIR /var/task
 
-# Copy function code, owned by the non-root runtime user
-COPY --chown=65534:65534 "bin/Release/lambda-publish"  .
+# Copy function code; keep root ownership, only execution happens as the non-root user
+COPY "bin/Release/lambda-publish"  .
 
 # Run as a non-root user (existing "nobody" user in the base image) to reduce blast radius on compromise
 USER 65534

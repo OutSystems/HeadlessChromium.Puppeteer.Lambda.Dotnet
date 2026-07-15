@@ -6,7 +6,8 @@
     <Company>OutSystems</Company>
     <Authors>RD Vanguard</Authors>
     <Description>OutSystems-maintained fork of HeadlessChromium.Puppeteer.Lambda.Dotnet (originally by Litmus): https://github.com/litmus/HeadlessChromium.Puppeteer.Lambda.Dotnet</Description>
-    <PackageLicenseUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Copyright>2022 Litmus, 2026 OutSystems</Copyright>
     <PackageProjectUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet</PackageProjectUrl>
     <RepositoryUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet</RepositoryUrl>
@@ -20,6 +21,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

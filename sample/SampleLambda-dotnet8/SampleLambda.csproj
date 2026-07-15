@@ -17,13 +17,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="HeadlessChromium.Puppeteer.Lambda.Dotnet" Version="1.1.0-dev" />
+    <PackageReference Include="HeadlessChromium.Puppeteer.Dotnet.OS.Fork" Version="1.1.1-os-dev" />
     <PackageReference Include="Amazon.Lambda.Core" Version="2.2.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="2.2.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
     <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
-    <PackageReference Include="PuppeteerSharp" Version="20.0.2" />
+    <PackageReference Include="PuppeteerSharp" Version="25.3.3" />
   </ItemGroup>
 
 </Project>

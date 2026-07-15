@@ -16,10 +16,10 @@ namespace SampleLambda
             await using (var page = await browser.NewPageAsync())
             {
                 await page.GoToAsync("https://www.google.com");
-                await page.ScreenshotAsync("./google.png");
+                await page.ScreenshotAsync("/tmp/google.png");
             }
 
-            return await File.ReadAllBytesAsync("./google.png");
+            return await File.ReadAllBytesAsync("/tmp/google.png");
         }
     }
 }

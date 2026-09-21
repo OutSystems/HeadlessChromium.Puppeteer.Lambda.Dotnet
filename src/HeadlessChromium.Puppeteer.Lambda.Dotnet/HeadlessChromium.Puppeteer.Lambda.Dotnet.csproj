@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/OutSystems/HeadlessChromium.Puppeteer.Lambda.Dotnet</RepositoryUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version Condition="'$(VersionSuffix)' != ''">1.1.1.$(VersionSuffix)</Version>
+    <Version Condition="'$(VersionSuffix)' != ''">1.2.1.$(VersionSuffix)</Version>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -21,6 +21,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="HeadlessChromium.Puppeteer.Lambda.Dotnet.Tests" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +37,14 @@
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="..\..\chrome-aws-lambda\package\bin\al2023.tar.br">
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+    <!--
+      Not from the npm payload: built by tools/build-wolfi-payload.sh and committed, because the
+      Sparticuz package has no Wolfi bundle. Supplements al2023.tar.br on Chainguard images.
+    -->
+    <Content Include="..\..\payloads\wolfi.tar.br">
       <Pack>true</Pack>
       <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>

@@ -1,7 +1,11 @@
 /*.tgz
-/tools
+# Cake downloads its tooling here; only our own committed scripts are tracked.
+/tools/*
+!/tools/verify-package-payloads.sh
+!/tools/build-wolfi-payload.sh
 /chrome-aws-lambda
 /artifacts
 .vs
 bin
 obj
+specs

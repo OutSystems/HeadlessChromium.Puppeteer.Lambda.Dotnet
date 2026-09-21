@@ -23,42 +23,39 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
         private readonly ILogger<ChromiumExtractor> logger;
         private readonly ILoggerFactory loggerFactory;
 
-        private string awsOperatingSystem;
-        public string AwsOperatingSystem 
+        private readonly PlatformDetector platformDetector;
+        private string operatingSystem;
+        public string OperatingSystem
         {
-            get 
+            get
             {
-                if (awsOperatingSystem != null) 
+                if (operatingSystem != null)
                 {
-                    return awsOperatingSystem;
+                    return operatingSystem;
                 }
 
-                if (File.Exists("/etc/system-release-cpe")) 
-                {
-                    var osDetails = File
-                        .ReadLines("/etc/system-release-cpe")
-                        .FirstOrDefault() ?? string.Empty;
+                operatingSystem = platformDetector.DetectPlatform();
 
-                    if (osDetails.EndsWith("amazon:amazon_linux:2")) 
-                    {
-                        awsOperatingSystem = "al2";
-                    }
-                    else if (osDetails.EndsWith("amazon:amazon_linux:2023")) 
-                    {
-                        awsOperatingSystem = "al2023";
-                    }
-                }
-
-                return awsOperatingSystem;
+                return operatingSystem;
             }
 
-            set => awsOperatingSystem = value;
+            set => operatingSystem = value;
         }
 
-        public ChromiumExtractor(ILoggerFactory loggerFactory) 
+        public ChromiumExtractor(ILoggerFactory loggerFactory)
+            : this(loggerFactory, null)
+        {
+        }
+
+        /// <summary>
+        /// Test seam: lets a detector pointed at fixture files be injected, so extraction
+        /// behaviour can be exercised without depending on the host's real /etc/os-release.
+        /// </summary>
+        internal ChromiumExtractor(ILoggerFactory loggerFactory, PlatformDetector platformDetector)
         {
             this.loggerFactory = loggerFactory;
             logger = loggerFactory.CreateLogger<ChromiumExtractor>();
+            this.platformDetector = platformDetector ?? new PlatformDetector(logger);
         }
 
         /// <summary>
@@ -83,17 +80,25 @@ namespace HeadlessChromium.Puppeteer.Lambda.Dotnet
 
             logger.LogDebug("Chromium doesn't exist, extracting");
 
-            lock (SyncObject) 
+            lock (SyncObject)
             {
+                // Resolved before locating the payload directory so the cheapest check fails
+                // first. Continuing without the platform bundle only defers the failure to
+                // Chromium's dynamic linker, which on a distroless image is undiagnosable.
+                if (string.IsNullOrEmpty(OperatingSystem))
+                {
+                    throw new ChromiumExtractionException(
+                        "Unable to determine which Chromium shared-library bundle to extract. " +
+                        $"Detected OS: {platformDetector.DescribeDetectedOs()}. " +
+                        $"Supported platforms: {string.Join(", ", PlatformDetector.SupportedPlatforms)}. " +
+                        "Set CHROMIUM_PLATFORM_OVERRIDE to one of them to bypass detection.");
+                }
+
                 var sourceDirectory = FindSourceDirectory();
 
-                if (!string.IsNullOrEmpty(AwsOperatingSystem)) 
+                foreach (var dependencyArchive in PlatformDetector.GetDependencyFileNames(OperatingSystem))
                 {
-                    ExtractDependencies($"{AwsOperatingSystem}.tar.br", "/tmp", sourceDirectory);
-                }
-                else 
-                {
-                    logger.LogWarning("Operating environment unexpected. Unable to extract correct dependencies.");
+                    ExtractDependencies(dependencyArchive, "/tmp", sourceDirectory);
                 }
 
                 ExtractDependencies("fonts.tar.br", "/tmp", sourceDirectory);

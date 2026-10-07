@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>SampleAspNetChainguard</RootNamespace>
+
+    <!--
+      The version ./build.ps1 (Cake) publishes into ../../artifacts, which is what CI restores.
+      Override it when testing a locally packed build, e.g.
+        dotnet publish -p:HeadlessChromiumPackageVersion=1.2.2-local
+      Re-packing the *same* version is not enough on a developer machine: the global NuGet cache
+      keeps serving the first copy it saw, so either bump the version or evict
+      ~/.nuget/packages/headlesschromium.puppeteer.dotnet.os.fork/<version>.
+    -->
+    <HeadlessChromiumPackageVersion Condition="'$(HeadlessChromiumPackageVersion)' == ''">1.2.1-os-dev</HeadlessChromiumPackageVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Logging and Logging.Console come from the ASP.NET Core shared framework. -->
+    <PackageReference Include="HeadlessChromium.Puppeteer.Dotnet.OS.Fork" Version="$(HeadlessChromiumPackageVersion)" />
+    <PackageReference Include="Mono.Posix.NETStandard" Version="1.0.0" />
+    <PackageReference Include="PuppeteerSharp" Version="25.3.3" />
+  </ItemGroup>
+
+</Project>
